@@ -1,0 +1,23 @@
+{
+  "name": "settlein",
+  "version": "2.0.0",
+  "description": "SettleIn — AI-powered Relocation Life-Setup Navigator",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "relocation",
+    "ai-agent",
+    "microsoft-agent-a-thon"
+  ],
+  "author": "Shriya Mohanty",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@google/genai": "^2.23.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}

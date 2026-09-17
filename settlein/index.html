@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SettleIn — Your AI-powered relocation life-setup navigator. Personalized guidance for utilities, healthcare, schools, and making your new city home.">
+  <title>SettleIn — Relocation Life-Setup Navigator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Mobile Sidebar Toggle -->
+  <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation">☰</button>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="app-container">
+
+    <!-- ═══ Sidebar ═══ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <div class="sidebar-logo-icon"><i data-lucide="home"></i></div>
+          <div class="sidebar-logo-text">
+            <h1>SettleIn</h1>
+            <span>Life-Setup Navigator</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-item active" data-view="dashboard" id="nav-dashboard">
+          <span class="nav-icon"><i data-lucide="layout-dashboard"></i></span><span>Dashboard</span>
+        </div>
+        <div class="nav-item" data-view="neighborhood" id="nav-neighborhood">
+          <span class="nav-icon"><i data-lucide="map-pin"></i></span><span>Neighborhood Matcher</span>
+        </div>
+        <div class="nav-item" data-view="inventory" id="nav-inventory">
+          <span class="nav-icon"><i data-lucide="package"></i></span><span>Pack & Move Inventory</span>
+        </div>
+        <div class="nav-item" data-view="chat" id="nav-chat">
+          <span class="nav-icon"><i data-lucide="message-square"></i></span><span>Chat with Agent</span>
+        </div>
+        <div class="nav-item" data-view="checklist" id="nav-checklist">
+          <span class="nav-icon"><i data-lucide="check-square"></i></span><span>My Checklist</span>
+        </div>
+        <div class="nav-item" data-view="documents" id="nav-documents">
+          <span class="nav-icon"><i data-lucide="file-text"></i></span><span>Documents</span>
+        </div>
+        <div class="nav-item" data-view="budget" id="nav-budget">
+          <span class="nav-icon"><i data-lucide="pie-chart"></i></span><span>Cost & Budget</span>
+        </div>
+
+        <div class="nav-divider"></div>
+
+        <div class="nav-item" data-view="aviation" id="nav-aviation">
+          <span class="nav-icon"><i data-lucide="plane"></i></span><span>Aviation Telemetry</span>
+        </div>
+
+        <div class="nav-item" data-view="about" id="nav-about">
+          <span class="nav-icon"><i data-lucide="info"></i></span><span>About This Agent</span>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="btn-logout" class="btn btn-secondary btn-sm" style="width:100%; display:none; margin-bottom:8px;">Logout</button>
+        <button id="btn-reset-demo" class="btn btn-ghost btn-sm" style="width:100%; margin-bottom:8px; font-size:0.6875rem;" onclick="resetDemoState()">🔄 Reset Demo State</button>
+        <p>Built for Microsoft Agent-a-thon 2026</p>
+      </div>
+    </aside>
+
+    <!-- ═══ Main Content ═══ -->
+    <main class="main-content" id="main-content">
+
+      <!-- ═══ Auth View ═══ -->
+      <div class="auth-screen" id="auth-view">
+        <div class="auth-card">
+          <div class="portal-toggle">
+            <button type="button" class="portal-toggle-btn active" id="btn-portal-citizen" onclick="switchAuthPortal('citizen')"><i data-lucide="user"></i> Citizen Portal</button>
+            <button type="button" class="portal-toggle-btn" id="btn-portal-admin" onclick="switchAuthPortal('admin')"><i data-lucide="shield"></i> Admin Gateway</button>
+          </div>
+
+          <div id="auth-portal-header">
+            <div style="font-size:2.5rem; margin-bottom:12px; color:var(--primary);"><i data-lucide="home" style="width:40px;height:40px;"></i></div>
+            <h2 id="auth-header-title" style="font-size:1.375rem; margin-bottom:6px;">Citizen <span class="gradient-text">Setup Portal</span></h2>
+            <p id="auth-header-desc" style="color:var(--text-secondary); font-size:0.8125rem; margin-bottom:20px;">Login or create an account to start your personalized relocation navigator.</p>
+          </div>
+
+          <!-- Citizen Login/Signup Tabs -->
+          <div id="citizen-auth-tabs" style="display:flex; gap:4px; margin-bottom:20px;">
+            <button type="button" class="tab-btn active" id="btn-mode-login" onclick="toggleAuthMode('login')" style="flex:1;">Sign In</button>
+            <button type="button" class="tab-btn" id="btn-mode-signup" onclick="toggleAuthMode('signup')" style="flex:1;">Create Account</button>
+          </div>
+
+          <!-- Admin Department Picker -->
+          <div id="admin-dept-picker" style="display:none; margin-bottom:16px;">
+            <label class="form-label" style="display:block; margin-bottom:6px;">Department Jurisdiction</label>
+            <select id="auth-department">
+              <option value="utilities">Utilities & Power Grid Board</option>
+              <option value="gov">Government & Citizen Services</option>
+              <option value="healthcare">Healthcare & Medical Registry</option>
+              <option value="banking">Banking & Financial Regulatory Board</option>
+              <option value="education">Education & Schools Board</option>
+              <option value="aviation">Aviation & Logistics Division</option>
+            </select>
+            <div style="font-size:0.6875rem; color:var(--primary); margin-top:4px;">* Admin: <code>admin</code> / <code>password</code></div>
+          </div>
+
+          <form id="auth-form" style="display:flex; flex-direction:column; gap:14px; text-align:left;" onsubmit="handleAuthSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Username</label>
+              <input type="text" id="auth-username" placeholder="Enter username..." required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <input type="password" id="auth-password" placeholder="Enter password..." required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" id="auth-submit-btn" style="margin-top:4px;">Sign In to Citizen Portal →</button>
+            <div id="auth-error" style="color:var(--danger); font-size:0.75rem; text-align:center; display:none; padding:8px; background:var(--danger-bg); border-radius:var(--radius-md);"></div>
+          </form>
+
+          <div style="margin-top:16px; font-size:0.6875rem; color:var(--text-tertiary); border-top:1px solid var(--border-secondary); padding-top:12px;">
+            Demo citizen account: <code>customer</code> / <code>password</code>
+            <div style="margin-top: 16px;">
+              <button type="button" class="btn btn-secondary btn-sm" style="width:100%; border: 1px dashed var(--border-primary); display:flex; align-items:center; justify-content:center; gap:8px;" onclick="loginAsMoverAdmin()">
+                <i data-lucide="truck" style="width:16px;height:16px;"></i> Login as Packer & Mover Admin
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Dashboard View ═══ -->
+      <div class="view active" id="dashboard-view">
+        <div class="view-container animate-in">
+          <!-- Hero -->
+          <div class="view-header" style="display:flex; justify-content:space-between; align-items:flex-end; padding-bottom:24px; border-bottom:1px solid var(--border-secondary);">
+            <div>
+              <h2 style="font-size:2rem;">Welcome to <span class="gradient-text" id="dashboard-city">Your New City</span>, <span id="dashboard-user-name">Friend</span>.</h2>
+              <p style="margin-top:8px;">Your personalized relocation command center.</p>
+            </div>
+            <div class="badge badge-primary" style="padding:6px 14px; font-size:0.6875rem;">Status: Planning</div>
+          </div>
+
+          <!-- KPI Stats -->
+          <div class="stats-row" style="margin-top:32px;">
+            <div class="stat-card" style="border-left:3px solid var(--primary);">
+              <div class="stat-label">Total Tasks</div>
+              <div class="stat-value" id="stat-total-tasks">0</div>
+            </div>
+            <div class="stat-card" style="border-left:3px solid var(--success);">
+              <div class="stat-label">Completed</div>
+              <div class="stat-value" id="stat-completed-tasks" style="color:var(--success);">0</div>
+            </div>
+            <div class="stat-card" style="border-left:3px solid var(--warning);">
+              <div class="stat-label">Pending</div>
+              <div class="stat-value" id="stat-pending-tasks" style="color:var(--warning);">0</div>
+            </div>
+            <div class="stat-card" style="border-left:3px solid var(--danger);">
+              <div class="stat-label">Critical</div>
+              <div class="stat-value" id="stat-critical-tasks" style="color:var(--danger);">0</div>
+            </div>
+          </div>
+
+          <!-- Main Grid -->
+          <div class="grid-2" style="margin-top:32px;">
+            <!-- Next Steps -->
+            <div class="card-flat">
+              <div class="flex-between" style="margin-bottom:20px;">
+                <h3>Recommended Next Steps</h3>
+                <button class="btn btn-sm btn-primary btn-pill" onclick="switchView('checklist')">View All</button>
+              </div>
+              <div id="dashboard-next-steps" style="display:flex; flex-direction:column; gap:12px;">
+              </div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:24px;">
+              <!-- Context -->
+              <div class="card-flat">
+                <h3 style="margin-bottom:20px;">Relocation Context</h3>
+                <div id="dashboard-context-info" style="display:flex; flex-direction:column; gap:16px;"></div>
+              </div>
+              <!-- Tips -->
+              <div class="card-flat">
+                <h3 style="margin-bottom:12px;">Insider Tips</h3>
+                <div id="tip-content" style="color:var(--text-secondary); font-size:0.8125rem; line-height:1.6; display:flex; flex-direction:column; gap:8px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SOS Dispatcher -->
+          <div class="card-flat" style="margin-top:32px; border:1px solid rgba(255,59,48,0.15);">
+            <div style="margin-bottom:20px;">
+              <h3 style="color:var(--danger); display:flex; align-items:center; gap:8px;"><i data-lucide="siren"></i> City Emergency SOS — <span id="sos-city-name">Your City</span></h3>
+              <p class="text-sm text-secondary" style="margin-top:4px;">Instant one-click access to police, hospital, fire, and municipal helpline.</p>
+            </div>
+            <div id="dashboard-sos-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Chat View ═══ -->
+      <div class="view" id="chat-view">
+        <div class="chat-container">
+          <div class="chat-header">
+            <div class="chat-avatar"><i data-lucide="bot"></i></div>
+            <div class="chat-header-info">
+              <h3>SettleIn Agent</h3>
+              <span>● Online — ready to help</span>
+            </div>
+          </div>
+          <div class="chat-messages" id="chat-messages"></div>
+          <div class="chat-input-bar">
+            <div class="chat-input-wrapper">
+              <textarea class="chat-input" id="chat-input" placeholder="Ask me about setting up your new city life..." rows="1"></textarea>
+              <button class="chat-send-btn" id="chat-send" disabled aria-label="Send message">➤</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Checklist View ═══ -->
+      <div class="view" id="checklist-view">
+        <div class="view-container animate-in">
+          <div class="flex-between" style="margin-bottom:24px; flex-wrap:wrap; gap:12px;">
+            <h2 style="display:flex; align-items:center; gap:8px;"><i data-lucide="check-square" style="color:var(--success);"></i> Your Setup Checklist</h2>
+            <div class="filter-bar" id="checklist-filters">
+              <button class="filter-btn active" onclick="setChecklistFilter('all', this)">All</button>
+              <button class="filter-btn" onclick="setChecklistFilter('pending', this)">Pending</button>
+              <button class="filter-btn" onclick="setChecklistFilter('completed', this)">Completed</button>
+              <button class="filter-btn" onclick="setChecklistFilter('day1', this)">📍 Day 1</button>
+              <button class="filter-btn" onclick="setChecklistFilter('week1', this)">📅 Week 1</button>
+              <button class="filter-btn" onclick="setChecklistFilter('month1', this)">📆 Month 1</button>
+              <button class="filter-btn" onclick="setChecklistFilter('settled', this)">🏡 Settled</button>
+            </div>
+          </div>
+          <div id="checklist-tasks" style="display:flex; flex-direction:column; gap:8px;"></div>
+        </div>
+      </div>
+
+      <!-- ═══ About View ═══ -->
+      <div class="view" id="about-view">
+        <style id="about-ui-styles">
+          #about-view {
+            position: relative;
+          }
+          .about-hero {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 48px auto;
+            position: relative;
+          }
+          .about-hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+          }
+          .about-hero h2 {
+            font-size: 2.75rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -1px;
+          }
+          .about-hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+          }
+          .premium-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            position: relative;
+            overflow: hidden;
+          }
+          .premium-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            border-color: rgba(255, 255, 255, 0.8);
+          }
+          .dark-theme .premium-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+          }
+          .dark-theme .premium-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+          }
+          .card-icon-wrapper {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+          }
+          .bg-gradient-1 { background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.15)); color: #6366f1; }
+          .bg-gradient-2 { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.15)); color: #10b981; }
+          .bg-gradient-3 { background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.15)); color: #f59e0b; }
+          .bg-gradient-4 { background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(2, 132, 199, 0.15)); color: #0284c7; }
+          
+          .section-title {
+            text-align: center;
+            margin: 56px auto 32px auto;
+            font-size: 1.8rem;
+            font-weight: 700;
+          }
+        </style>
+
+        <div class="view-container animate-in">
+          <div class="about-hero">
+            <div class="about-hero-badge">Microsoft Agent-a-thon 2026</div>
+            <h2>Building the Modern <br><span class="gradient-text">Relocation Operating System</span></h2>
+            <p>SettleIn transforms the fragmented, stressful process of moving to a new city into a seamless, delightful, and fully autonomous digital experience.</p>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:24px; margin-bottom:20px;">
+            <div class="premium-card">
+              <div class="card-icon-wrapper bg-gradient-1">✨</div>
+              <h4 style="font-size:1.1rem; margin-bottom:12px; font-weight:700;">Unified Checklist Engine</h4>
+              <p class="text-sm text-secondary" style="line-height:1.7;">A centralized task matrix that dynamically adapts to your personal profile in real-time, integrating everything from local property visits to civic utility activations.</p>
+            </div>
+            
+            <div class="premium-card">
+              <div class="card-icon-wrapper bg-gradient-2">📍</div>
+              <h4 style="font-size:1.1rem; margin-bottom:12px; font-weight:700;">Dynamic Location Matcher</h4>
+              <p class="text-sm text-secondary" style="line-height:1.7;">Proprietary algorithms that correlate real-time safety metrics, transit proximity, and lifestyle preferences to recommend your optimal new neighborhood.</p>
+            </div>
+            
+            <div class="premium-card">
+              <div class="card-icon-wrapper bg-gradient-3">📦</div>
+              <h4 style="font-size:1.1rem; margin-bottom:12px; font-weight:700;">Inventory Tracker</h4>
+              <p class="text-sm text-secondary" style="line-height:1.7;">A granular packing manifest system that generates virtual boxes, assigns IDs, and coordinates seamlessly with backend transport APIs.</p>
+            </div>
+            
+            <div class="premium-card">
+              <div class="card-icon-wrapper bg-gradient-4">📡</div>
+              <h4 style="font-size:1.1rem; margin-bottom:12px; font-weight:700;">Real-Time Telemetry</h4>
+              <p class="text-sm text-secondary" style="line-height:1.7;">Live integrations surfacing crucial local insights like real-time safety indexes, rent benchmarks, and aviation/transit operational statuses.</p>
+            </div>
+          </div>
+
+          <h3 class="section-title">Under The Hood: <span class="gradient-text">AI Agent Capabilities</span></h3>
+          
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:24px; margin-bottom:40px;">
+            <div class="premium-card" style="display:flex; flex-direction:column;">
+              <div class="card-icon-wrapper bg-gradient-1">🧠</div>
+              <div>
+                <h4 style="font-size:1.1rem; margin-bottom:8px; font-weight:700;">Context-Aware NLP</h4>
+                <p class="text-sm text-secondary" style="line-height:1.6;">The agent understands your deep profile, household size, and budget constraints to offer hyper-personalized advice rather than generic chatbot responses.</p>
+              </div>
+            </div>
+            
+            <div class="premium-card" style="display:flex; flex-direction:column;">
+              <div class="card-icon-wrapper bg-gradient-2">🔄</div>
+              <div>
+                <h4 style="font-size:1.1rem; margin-bottom:8px; font-weight:700;">Cross-Department Sync</h4>
+                <p class="text-sm text-secondary" style="line-height:1.6;">When you check an item off your list, the agent automatically interfaces with the secure Department Admin Portal to request civic clearances invisibly.</p>
+              </div>
+            </div>
+            
+            <div class="premium-card" style="display:flex; flex-direction:column;">
+              <div class="card-icon-wrapper bg-gradient-3">🔐</div>
+              <div>
+                <h4 style="font-size:1.1rem; margin-bottom:8px; font-weight:700;">Role-Based Segregation</h4>
+                <p class="text-sm text-secondary" style="line-height:1.6;">Customer data and administrative workflows are strictly isolated. The agent operates securely across boundaries without compromising user privacy.</p>
+              </div>
+            </div>
+            
+            <div class="premium-card" style="display:flex; flex-direction:column;">
+              <div class="card-icon-wrapper bg-gradient-4">⚡</div>
+              <div>
+                <h4 style="font-size:1.1rem; margin-bottom:8px; font-weight:700;">Live API Orchestration</h4>
+                <p class="text-sm text-secondary" style="line-height:1.6;">The agent doesn't just read static data; it actively queries live backend databases for neighborhoods, property availability, and logistics statuses.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Documents View ═══ -->
+      <div class="view" id="documents-view">
+        <div class="view-container animate-in">
+          <div class="view-header">
+            <h2 style="display:flex; align-items:center; gap:8px;"><i data-lucide="file-text" style="color:var(--primary);"></i> Document Tracker</h2>
+            <p>Organize and track essential documents for your relocation. Critical documents are flagged.</p>
+          </div>
+          <div id="documents-list" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:16px;"></div>
+        </div>
+      </div>
+
+      <!-- ═══ Budget View ═══ -->
+      <div class="view" id="budget-view">
+        <div class="view-container animate-in">
+          <div class="view-header" style="border-bottom:1px solid var(--border-secondary); padding-bottom:20px;">
+            <h2><span class="gradient-text">Cost & Budget Planner</span></h2>
+            <p>Analyze your destination's cost of living and forecast relocation expenses.</p>
+          </div>
+
+          <div class="grid-2" style="margin-top:32px;">
+            <!-- Cost of Living -->
+            <div class="card-flat">
+              <h3 style="margin-bottom:20px; text-transform:uppercase; font-size:0.75rem; letter-spacing:0.06em; color:var(--text-tertiary);">Cost of Living — <span id="budget-city-name" style="color:var(--primary);">Your City</span></h3>
+              <div id="cost-of-living-content"></div>
+            </div>
+            <!-- Budget Estimator -->
+            <div class="card-flat">
+              <h3 style="margin-bottom:20px; text-transform:uppercase; font-size:0.75rem; letter-spacing:0.06em; color:var(--text-tertiary);">Monthly Budget Estimator</h3>
+              <div class="form-group" style="margin-bottom:16px;">
+                <label class="form-label">Base Monthly Income (After Tax)</label>
+                <div style="position:relative;">
+                  <span style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-secondary); font-weight:600;">$</span>
+                  <input type="number" id="budget-income" placeholder="5000" style="padding-left:28px;">
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom:20px;">
+                <label class="form-label">Max Housing Allocation (%)</label>
+                <input type="range" id="budget-housing-percent" min="10" max="60" value="30" style="border:none; padding:0; background:transparent;">
+                <div class="flex-between text-sm" style="color:var(--primary); font-weight:600; margin-top:4px;">
+                  <span>Conservative</span>
+                  <span id="budget-housing-label">30%</span>
+                  <span>Aggressive</span>
+                </div>
+              </div>
+              <div style="background:var(--primary-subtle); border-left:3px solid var(--primary); padding:12px 16px; border-radius:var(--radius-md); margin-bottom:20px;">
+                <p class="text-sm text-secondary" style="margin:0;">Recommended Max Rent:</p>
+                <p id="budget-max-rent" style="margin:4px 0 0; font-size:1.5rem; font-weight:800; color:var(--text-primary);">$1,500</p>
+              </div>
+              <button class="btn btn-primary" onclick="calculateBudget()" style="width:100%;">Recalculate Projections</button>
+            </div>
+          </div>
+          
+          <!-- Moving Logistics Estimator -->
+          <div class="card-flat" style="margin-top:24px;">
+            <h3 style="margin-bottom:20px; text-transform:uppercase; font-size:0.75rem; letter-spacing:0.06em; color:var(--text-tertiary);">Moving Logistics Cost Estimator</h3>
+            <div class="grid-2">
+              <div>
+                <div class="form-group" style="margin-bottom:16px;">
+                  <label class="form-label">Moving Distance (km)</label>
+                  <input type="number" id="budget-moving-dist" placeholder="1200" value="1200">
+                </div>
+                <div class="form-group" style="margin-bottom:16px;">
+                  <label class="form-label">Home Size (BHK/Rooms)</label>
+                  <input type="number" id="budget-moving-rooms" placeholder="2" value="2">
+                </div>
+                <div class="form-group" style="margin-bottom:16px; display:flex; align-items:center; gap:8px;">
+                  <input type="checkbox" id="budget-moving-packing" checked style="width:18px; height:18px;">
+                  <label for="budget-moving-packing" class="text-sm font-semibold">Include Professional Packing Services</label>
+                </div>
+                <button class="btn btn-secondary" onclick="calculateMovingExpense()">Estimate Moving Costs</button>
+              </div>
+              <div id="moving-cost-results" style="background:var(--bg-secondary); padding:20px; border-radius:var(--radius-md); border:1px solid var(--border-light);">
+                <div class="text-sm text-secondary">Fill details to see estimates.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Neighborhood Matcher View ═══ -->
+      <div class="view" id="neighborhood-view">
+        <div class="view-container animate-in">
+          <div class="view-header" style="text-align:center;">
+            <h2>🏘️ <span class="gradient-text">Neighborhood & Home Finder</span></h2>
+            <p style="max-width:100%;">Explore curated residential enclaves and browse verified apartments for rent or lease.</p>
+          </div>
+
+          <!-- Dual Tabs -->
+          <div class="tab-bar" style="max-width:500px; margin:0 auto 24px;">
+            <button class="tab-btn active" id="tab-btn-hoods" onclick="switchMatcherTab('hoods')">🏘️ Neighborhoods</button>
+            <button class="tab-btn" id="tab-btn-rentals" onclick="switchMatcherTab('rentals')">🏠 Homes for Rent</button>
+          </div>
+
+          <!-- Section 1: Neighborhoods -->
+          <div id="section-neighborhoods">
+            <div class="card-flat" style="margin-bottom:20px; display:flex; flex-direction:column; gap:16px;">
+              <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+                <div style="flex:1; min-width:220px;">
+                  <select id="hood-city-select" style="font-weight:600;">
+                    <option value="Bhubaneswar, India">🇮🇳 Bhubaneswar, India</option>
+                    <option value="Bengaluru, India">🇮🇳 Bengaluru, India</option>
+                    <option value="Mumbai, India">🇮🇳 Mumbai, India</option>
+                    <option value="Singapore">🇸🇬 Singapore</option>
+                    <option value="Dubai, UAE">🇦🇪 Dubai, UAE</option>
+                    <option value="Austin, TX">🇺🇸 Austin, TX</option>
+                  </select>
+                </div>
+                <div style="flex:1; min-width:200px;">
+                  <input type="text" id="hood-search-input" placeholder="🔍 Search neighborhood, landmark...">
+                </div>
+              </div>
+
+              <!-- Vibe Filters -->
+              <div class="filter-bar" id="hood-vibe-filters">
+                <button class="filter-btn active hood-vibe-btn" data-vibe="all">🌐 All</button>
+                <button class="filter-btn hood-vibe-btn" data-vibe="Tech & Corporate">💼 Tech & Corporate</button>
+                <button class="filter-btn hood-vibe-btn" data-vibe="Peaceful & Family">🌳 Peaceful & Family</button>
+                <button class="filter-btn hood-vibe-btn" data-vibe="Trendy & Nightlife">🎭 Trendy & Nightlife</button>
+                <button class="filter-btn hood-vibe-btn" data-vibe="Trendy & Central">🏙️ Central</button>
+              </div>
+
+              <!-- Match Calculator -->
+              <div style="background:var(--primary-subtle); border-radius:var(--radius-lg); padding:12px 16px; display:flex; flex-direction:column; gap:8px; border:1px solid rgba(88,86,214,0.1);">
+                <div class="flex-between" style="flex-wrap:wrap; gap:6px;">
+                  <span class="text-sm font-bold">🎯 Match Calculator</span>
+                  <span class="badge badge-primary" id="hood-match-badge">Live Match Active</span>
+                </div>
+                <div style="display:flex; gap:16px; flex-wrap:wrap; font-size:0.75rem; color:var(--text-secondary);">
+                  <label style="display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="pref-metro" class="hood-pref" checked> 🚇 Metro/Transit</label>
+                  <label style="display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="pref-schools" class="hood-pref" checked> 🎓 Schools (>9.0)</label>
+                  <label style="display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="pref-safety" class="hood-pref" checked> 🛡️ Safety (>9.0)</label>
+                  <label style="display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="pref-greenery" class="hood-pref"> 🌿 Parks & Gardens</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Location Pills -->
+            <div class="card-flat" style="margin-bottom:20px; padding:14px 18px;">
+              <div class="flex-between" style="margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+                <span class="text-sm font-bold">📍 Enclaves in <span id="hood-selected-city-text" style="color:var(--primary);">Your City</span>:</span>
+                <span class="text-xs text-secondary">Tap to browse homes</span>
+              </div>
+              <div class="location-bar" id="hood-location-pills"></div>
+            </div>
+
+            <!-- Hood Grid -->
+            <div id="neighborhoods-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:16px;"></div>
+          </div>
+
+          <!-- Section 2: Rentals -->
+          <div id="section-rentals" style="display:none;">
+            <div class="card-flat" style="margin-bottom:20px; display:flex; flex-direction:column; gap:16px;">
+              <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+                <div style="flex:1; min-width:200px;">
+                  <select id="rental-city-select" style="font-weight:600;"></select>
+                </div>
+                <div style="flex:1; min-width:200px;">
+                  <input type="text" id="rental-search-input" placeholder="🔍 Search house, society...">
+                </div>
+              </div>
+
+              <!-- Type + BHK Filters -->
+              <div class="flex-between" style="flex-wrap:wrap; gap:12px;">
+                <div class="filter-bar" id="rental-type-filters">
+                  <button class="filter-btn active rental-type-btn" data-type="all">🏠 All</button>
+                  <button class="filter-btn rental-type-btn" data-type="Rent">🏷️ Rent</button>
+                  <button class="filter-btn rental-type-btn" data-type="Lease">📋 Lease</button>
+                </div>
+                <div class="filter-bar" id="rental-bhk-filters">
+                  <button class="filter-btn active rental-bhk-btn" data-bhk="all">All BHK</button>
+                  <button class="filter-btn rental-bhk-btn" data-bhk="1BHK">1 BHK</button>
+                  <button class="filter-btn rental-bhk-btn" data-bhk="2BHK">2 BHK</button>
+                  <button class="filter-btn rental-bhk-btn" data-bhk="3BHK">3 BHK</button>
+                  <button class="filter-btn rental-bhk-btn" data-bhk="4BHK">4 BHK+</button>
+                </div>
+              </div>
+
+              <!-- Pet + Recommend -->
+              <div class="flex-between" style="background:var(--primary-subtle); border-radius:var(--radius-md); padding:10px 14px; border:1px solid rgba(88,86,214,0.08);">
+                <div class="text-sm"><span class="font-bold" style="color:var(--primary);">✨ Personalized:</span> <span id="rental-recommend-text">Showing tailored homes.</span></div>
+                <label style="display:flex; align-items:center; gap:6px; font-size:0.6875rem; cursor:pointer; color:var(--text-secondary);"><input type="checkbox" id="filter-pet-friendly"> 🐾 Pet-Friendly</label>
+              </div>
+
+              <!-- Location Filter -->
+              <div style="border-top:1px solid var(--border-secondary); padding-top:12px;">
+                <div class="flex-between" style="margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+                  <span class="text-sm font-bold">📍 Choose Location:</span>
+                  <span id="rental-location-clear-btn" style="display:none; font-size:0.6875rem; color:var(--primary); cursor:pointer; font-weight:700;" onclick="clearLocationFilter()">✕ Show All</span>
+                </div>
+                <div class="location-bar" id="rental-location-pills"></div>
+              </div>
+            </div>
+
+            <!-- Location Showcase -->
+            <div id="rental-location-showcase" style="display:none;" class="card-flat" style="margin-bottom:20px;"></div>
+
+            <!-- Rental Grid -->
+            <div id="rentals-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:16px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Pack & Move Inventory View ═══ -->
+      <div class="view" id="inventory-view">
+        <div class="view-container animate-in">
+          <div class="view-header">
+            <h2>📦 <span class="gradient-text">Smart Move & Room-by-Room Inventory</span></h2>
+            <p>Track, categorize, and label every box during your relocation.</p>
+          </div>
+
+          <!-- Summary Stats -->
+          <div class="stats-row" style="margin-bottom:24px;">
+            <div class="stat-card">
+              <div class="stat-icon">📦</div>
+              <div class="stat-value" id="inv-total-boxes">0</div>
+              <div class="stat-label">Packed Boxes</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">⚖️</div>
+              <div class="stat-value" id="inv-total-weight">0 kg</div>
+              <div class="stat-label">Total Weight</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">💎</div>
+              <div class="stat-value" id="inv-total-value">₹0</div>
+              <div class="stat-label">Insured Value</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">⚠️</div>
+              <div class="stat-value" id="inv-total-fragile">0</div>
+              <div class="stat-label">Fragile Items</div>
+            </div>
+          </div>
+
+          <!-- Room Tabs + Actions -->
+          <div class="flex-between" style="flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+            <div class="filter-bar" id="inv-room-tabs">
+              <button class="filter-btn active inv-room-btn" data-room="all">All Rooms</button>
+              <button class="filter-btn inv-room-btn" data-room="living">🛋️ Living</button>
+              <button class="filter-btn inv-room-btn" data-room="bedroom">🛏️ Bedroom</button>
+              <button class="filter-btn inv-room-btn" data-room="kitchen">🍳 Kitchen</button>
+              <button class="filter-btn inv-room-btn" data-room="office">💻 Office</button>
+            </div>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="btn btn-primary btn-sm" onclick="showAddBoxModal()">+ Add Item</button>
+              <button class="btn btn-secondary btn-sm" onclick="showBoxLabelsModal()">🏷️ Print Labels</button>
+              <button class="btn btn-secondary btn-sm" onclick="exportInventorySlip()">📥 Packing Slip</button>
+            </div>
+          </div>
+
+          <!-- Search + Status -->
+          <div class="card-flat" style="padding:12px 16px; margin-bottom:16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+            <div style="flex:1; min-width:200px;">
+              <input type="text" id="inv-search-input" placeholder="🔍 Search box, item, category...">
+            </div>
+            <div class="filter-bar" id="inv-status-filters">
+              <button class="filter-btn active inv-status-btn" data-status="ALL">All</button>
+              <button class="filter-btn inv-status-btn" data-status="Packed">📦 Packed</button>
+              <button class="filter-btn inv-status-btn" data-status="Loaded">🚛 Loaded</button>
+              <button class="filter-btn inv-status-btn" data-status="Delivered">✅ Delivered</button>
+              <button class="filter-btn inv-status-btn" data-status="FRAGILE">⚠️ Fragile</button>
+            </div>
+          </div>
+
+          <!-- Inventory Table -->
+          <div class="card-flat" style="overflow-x:auto;">
+            <table class="data-table" id="inv-table">
+              <thead>
+                <tr>
+                  <th>Box Label</th>
+                  <th>Item / Description</th>
+                  <th>Room & Category</th>
+                  <th>Weight</th>
+                  <th>Insured Value</th>
+                  <th>Fragile?</th>
+                  <th>Status</th>
+                  <th style="text-align:right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="inv-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Admin Portal View ═══ -->
+      <div class="view" id="admin-view">
+        <div class="view-container animate-in">
+          <div class="view-header">
+            <h2>🛡️ <span class="gradient-text">Departmental Admin Portal</span></h2>
+            <p><strong>Civic Clearance & Relocation Approvals Hub</strong> — Review citizen requests, inspect documentation, issue digital clearances.</p>
+          </div>
+
+          <!-- Dept Tabs -->
+          <div class="filter-bar" id="admin-dept-tabs" style="margin-bottom:16px;"></div>
+
+          <!-- Queue Stats -->
+          <div class="stats-row" style="margin-bottom:24px;">
+            <div class="stat-card"><div class="stat-icon">📋</div><div class="stat-value" id="adm-total">4</div><div class="stat-label">Total</div></div>
+            <div class="stat-card"><div class="stat-icon">⏳</div><div class="stat-value" id="adm-pending">3</div><div class="stat-label">Pending</div></div>
+            <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-value" id="adm-approved">1</div><div class="stat-label">Approved</div></div>
+            <div class="stat-card"><div class="stat-icon">❌</div><div class="stat-value" id="adm-rejected">0</div><div class="stat-label">Rejected</div></div>
+          </div>
+
+          <!-- Action Bar -->
+          <div class="flex-between" style="flex-wrap:wrap; gap:12px; margin-bottom:24px;">
+            <div class="filter-bar">
+              <button class="filter-btn active adm-filter-btn" data-status="ALL">All Status</button>
+              <button class="filter-btn adm-filter-btn" data-status="PENDING">Pending</button>
+              <button class="filter-btn adm-filter-btn" data-status="APPROVED">Approved</button>
+            </div>
+            <button class="btn btn-primary" id="btn-open-submit-modal">+ Submit New Request</button>
+          </div>
+
+          <!-- Requests Queue -->
+          <div>
+            <h3 style="margin-bottom:16px;">📋 Department Clearance Queue</h3>
+            <div id="admin-requests-list" style="display:flex; flex-direction:column; gap:12px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Aviation Analytics View ═══ -->
+      <div class="view" id="aviation-view">
+        <div class="view-container animate-in">
+          <div class="view-header">
+            <h2>✈️ <span class="gradient-text">Real-Time Aviation & City Logistics</span></h2>
+            <p>Live spatial telemetry, GIS coordinates, airspace monitoring, and ML-powered delay prediction.</p>
+          </div>
+
+          <!-- Aviation Stats -->
+          <div class="stats-row" style="margin-bottom:24px;">
+            <div class="stat-card"><div class="stat-icon">🛫</div><div class="stat-value" id="av-tracked">1,428</div><div class="stat-label">Flights Tracked</div></div>
+            <div class="stat-card"><div class="stat-icon">⏱️</div><div class="stat-value" id="av-ontime">92.4%</div><div class="stat-label">On-Time</div></div>
+            <div class="stat-card"><div class="stat-icon">⛽</div><div class="stat-value" id="av-fuel">93.8%</div><div class="stat-label">Fuel Efficiency</div></div>
+            <div class="stat-card"><div class="stat-icon">🗺️</div><div class="stat-value" id="av-nodes">340</div><div class="stat-label">GIS Nodes</div></div>
+          </div>
+
+          <!-- Telemetry Table -->
+          <div class="card-flat" style="margin-bottom:24px;">
+            <h3 style="margin-bottom:16px;">📡 Live Aviation Spatial Telemetry</h3>
+            <div style="overflow-x:auto;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Flight</th><th>Schedule</th><th>Route</th><th>GIS Coordinates</th><th>Altitude / Speed</th><th>Status</th><th>Delay Risk</th><th>Data Sources</th>
+                  </tr>
+                </thead>
+                <tbody id="aviation-telemetry-rows"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ML Predictor -->
+          <div class="card-flat">
+            <h3 style="margin-bottom:16px;">🧠 ML Delay Risk Assessor</h3>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-bottom:16px;">
+              <div class="form-group">
+                <label class="form-label">Flight Number</label>
+                <input type="text" id="av-input-flight" value="AI-204">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Distance (km)</label>
+                <input type="number" id="av-input-dist" value="1450">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Weather</label>
+                <select id="av-input-weather">
+                  <option value="Clear">Clear Sky</option>
+                  <option value="Rain">Moderate Rain</option>
+                  <option value="Thunderstorm">Thunderstorm</option>
+                  <option value="Fog">Heavy Fog</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-primary" id="av-btn-predict">Run ML Prediction</button>
+            <div id="av-prediction-result" style="display:none; margin-top:16px; padding:16px; border-radius:var(--radius-lg); background:var(--primary-subtle); border:1px solid rgba(88,86,214,0.15);"></div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ═══ MODALS ═══ -->
+
+  <!-- Book Property Tour Modal -->
+  <div class="modal-overlay hidden" id="book-tour-modal-overlay">
+    <div class="modal" style="max-width:520px;">
+      <div class="modal-header">
+        <div>
+          <h3>🏠 Book Property Tour</h3>
+          <p class="text-xs text-secondary" style="margin-top:2px;">Schedule an in-person or virtual walkthrough</p>
+        </div>
+        <button class="modal-close" onclick="closeBookTourModal()">✕</button>
+      </div>
+      <div id="book-tour-property-summary" style="background:var(--bg-secondary); border-radius:var(--radius-lg); padding:12px; margin-bottom:16px; border:1px solid var(--border-secondary);"></div>
+      <form id="book-tour-form" style="display:flex; flex-direction:column; gap:12px;">
+        <input type="hidden" id="tour-prop-id">
+        <input type="hidden" id="tour-prop-title">
+        <input type="hidden" id="tour-prop-society">
+        <input type="hidden" id="tour-prop-city">
+        <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:10px;">
+          <div class="form-group"><label class="form-label">Preferred Date</label><input type="date" id="tour-date" required></div>
+          <div class="form-group"><label class="form-label">Time Slot</label>
+            <select id="tour-time" required>
+              <option value="10:00 AM">🌅 10:00 AM</option>
+              <option value="11:30 AM">☀️ 11:30 AM</option>
+              <option value="02:30 PM">🌤️ 02:30 PM</option>
+              <option value="04:30 PM">🍵 04:30 PM</option>
+              <option value="06:00 PM">🌇 06:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label class="form-label">Tour Format</label>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <label style="display:flex; align-items:center; gap:8px; background:var(--bg-secondary); border:1px solid var(--border-secondary); border-radius:var(--radius-md); padding:8px 10px; cursor:pointer; font-size:0.75rem; font-weight:600;">
+              <input type="radio" name="tour-mode" value="In-Person Walkthrough" checked> 🚶 In-Person
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; background:var(--bg-secondary); border:1px solid var(--border-secondary); border-radius:var(--radius-md); padding:8px 10px; cursor:pointer; font-size:0.75rem; font-weight:600;">
+              <input type="radio" name="tour-mode" value="Video Tour"> 📹 Video Call
+            </label>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="form-group"><label class="form-label">Name</label><input type="text" id="tour-applicant-name" placeholder="Your Name" required></div>
+          <div class="form-group"><label class="form-label">Phone / WhatsApp</label><input type="tel" id="tour-phone" placeholder="+91 98765 43210" required></div>
+        </div>
+        <div class="form-group"><label class="form-label">Notes</label><input type="text" id="tour-notes" placeholder="e.g. Balcony sunlight, EV charging..."></div>
+        <button type="submit" class="btn btn-primary btn-lg btn-pill" style="margin-top:4px;">Confirm Property Tour →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Submit Request Modal -->
+  <div class="modal-overlay hidden" id="submit-request-overlay">
+    <div class="modal" style="max-width:500px;">
+      <div class="modal-header">
+        <h3>📋 Submit Department Request</h3>
+        <button class="modal-close" id="close-submit-modal">✕</button>
+      </div>
+      <form id="submit-request-form" style="display:flex; flex-direction:column; gap:12px;">
+        <div class="form-group"><label class="form-label">Target Department</label>
+          <select id="req-dept" required>
+            <option value="gov">Government & Citizen Services</option>
+            <option value="utilities">Utilities & Power Grid Board</option>
+            <option value="healthcare">Healthcare & Medical Registry</option>
+            <option value="banking">Banking & Financial Regulatory Board</option>
+            <option value="education">Education & Schools Board</option>
+            <option value="aviation">Aviation & Logistics Division</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Request Title</label><input type="text" id="req-title" value="3-Phase Electricity Meter Connection" required></div>
+        <div class="form-group"><label class="form-label">Applicant Name</label><input type="text" id="req-name" value="Shriya Mohanty" required></div>
+        <div class="form-group"><label class="form-label">City / Jurisdiction</label><input type="text" id="req-city" value="Bhubaneswar, India" required></div>
+        <div class="form-group"><label class="form-label">Request Details</label><textarea id="req-notes" rows="3" required>Requested residential utility clearance and 3-Phase smart meter synchronization.</textarea></div>
+        <div id="req-modal-status" style="display:none; padding:8px; border-radius:var(--radius-md); font-size:0.75rem; text-align:center;"></div>
+        <button type="submit" class="btn btn-primary btn-lg" style="margin-top:4px;">Submit to Department Queue →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Box Modal -->
+  <div class="modal-overlay hidden" id="add-box-overlay">
+    <div class="modal" style="max-width:460px;">
+      <div class="modal-header">
+        <h3>📦 Add Packed Box / Item</h3>
+        <button class="modal-close" onclick="closeAddBoxModal()">✕</button>
+      </div>
+      <form id="add-box-form" onsubmit="handleSaveNewBox(event)" style="display:flex; flex-direction:column; gap:12px;">
+        <div class="form-group"><label class="form-label">Room</label>
+          <select id="box-room" required>
+            <option value="living">🛋️ Living Room</option>
+            <option value="bedroom">🛏️ Master Bedroom</option>
+            <option value="kitchen">🍳 Kitchen & Dining</option>
+            <option value="office">💻 Home Office</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Item Description</label><input type="text" id="box-name" placeholder="e.g. 55-inch Monitor & Soundbar" required></div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="form-group"><label class="form-label">Category</label><input type="text" id="box-category" placeholder="Electronics..." required></div>
+          <div class="form-group"><label class="form-label">Box Label</label><input type="text" id="box-id" placeholder="BOX-OF-04" required></div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="form-group"><label class="form-label">Weight (kg)</label><input type="number" id="box-weight" value="12" min="1" required></div>
+          <div class="form-group"><label class="form-label">Insured Value</label><input type="number" id="box-value" value="25000" min="100" required></div>
+        </div>
+        <label style="display:flex; align-items:center; gap:8px; font-size:0.75rem; cursor:pointer;">
+          <input type="checkbox" id="box-fragile"> ⚠️ Fragile item — handle with care
+        </label>
+        <button type="submit" class="btn btn-primary btn-lg" style="margin-top:4px;">Save Box to Inventory →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Commute Guide Modal -->
+  <div class="modal-overlay hidden" id="commute-guide-overlay">
+    <div class="modal" style="max-width:520px;">
+      <div class="modal-header">
+        <h3>🚇 Transit & Commute Matrix</h3>
+        <button class="modal-close" onclick="closeCommuteGuide()">✕</button>
+      </div>
+      <div id="commute-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Lease Guide Modal -->
+  <div class="modal-overlay hidden" id="lease-modal-overlay">
+    <div class="modal" style="max-width:560px;">
+      <div class="modal-header">
+        <h3>📋 Lease & Tenancy Guide</h3>
+        <button class="modal-close" onclick="closeLeaseModal()">✕</button>
+      </div>
+      <div id="lease-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Box Labels Modal -->
+  <div class="modal-overlay hidden" id="box-labels-overlay">
+    <div class="modal" style="max-width:620px; max-height:85vh; display:flex; flex-direction:column;">
+      <div class="modal-card">
+        <h3 style="margin-bottom:12px;">🏷️ Print Box Labels</h3>
+        <div id="box-labels-container" style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px; max-height:400px; overflow-y:auto; padding-right:8px;"></div>
+        <div class="flex-between" style="gap:12px;">
+          <button class="btn btn-secondary" style="flex:1;" onclick="closeBoxLabelsModal()">Close</button>
+          <button class="btn btn-primary" style="flex:1;" onclick="window.print()">🖨️ Print Labels</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Email Simulation Modal -->
+  <div class="modal-overlay hidden" id="email-modal-overlay">
+    <div class="modal-card" style="max-width:500px;">
+      <div style="background:var(--primary-glow); padding:24px; border-radius:var(--radius-lg) var(--radius-lg) 0 0; margin:-24px -24px 20px -24px; text-align:center;">
+        <div style="font-size:3rem; margin-bottom:8px;">📨</div>
+        <h3 style="color:var(--text-primary);">Email Sent Successfully!</h3>
+      </div>
+      <div id="email-modal-body" style="font-family:monospace; font-size:0.875rem; background:#f4f4f5; padding:16px; border-radius:var(--radius-md); margin-bottom:24px; white-space:pre-wrap; border:1px solid var(--border-secondary);">
+      </div>
+      <button class="btn btn-primary" style="width:100%;" onclick="closeModal('email-modal-overlay')">Close Inbox</button>
+    </div>
+  </div>
+
+  <!-- ═══ Onboarding Flashcards ═══ -->
+  <div class="flashcard-overlay hidden" id="onboarding-overlay">
+    <div class="flashcard-container" id="flashcard-container">
+      <div class="flashcard-header">
+        <div class="flashcard-badge">Flashcard <span id="flashcard-step-num">1</span> of 5</div>
+        <button id="onboarding-skip" class="flashcard-skip-btn">Skip Setup ✕</button>
+      </div>
+      <div class="flashcard-progress-track">
+        <div class="flashcard-progress-fill" id="flashcard-progress-bar"></div>
+      </div>
+      <div class="flashcard-body" id="flashcard-card-content"></div>
+      <div class="flashcard-footer">
+        <button class="btn btn-secondary btn-sm btn-pill" id="onboarding-back" style="display:none;">← Previous</button>
+        <div style="flex:1;"></div>
+        <button class="btn btn-primary btn-sm btn-pill" id="onboarding-next">Next Flashcard →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/agent.js"></script>
+  <script src="js/checklist.js"></script>
+  <script src="js/app.js"></script>
+  
+  <!-- Add lucide icons initializer -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

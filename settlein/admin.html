@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SettleIn - Movers & Logistics Admin</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body { background-color: var(--bg-primary); }
+    .admin-header {
+      background: var(--bg-card);
+      padding: 16px 32px;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .admin-container {
+      max-width: 1200px;
+      margin: 32px auto;
+      padding: 0 16px;
+    }
+  </style>
+</head>
+<body>
+  <header class="admin-header">
+    <div style="font-size:1.5rem; font-weight:800; color:var(--primary);">🚚 SettleIn Movers Admin</div>
+    <div><button onclick="adminLogout()" class="btn btn-ghost">Sign Out</button></div>
+  </header>
+  
+  <main class="admin-container">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:24px;">
+      <div>
+        <h1 style="margin-bottom:8px;">Global Logistics Hub</h1>
+        <p class="text-secondary">Manage and track all customer packed boxes currently in transit.</p>
+      </div>
+      <div>
+        <button class="btn btn-secondary" onclick="loadAdminInventory()">🔄 Refresh Data</button>
+      </div>
+    </div>
+    
+    <div class="card" style="padding:0; overflow:hidden;">
+      <table class="data-table" style="margin:0;">
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Box #</th>
+            <th>Item / Description</th>
+            <th>Room</th>
+            <th>Weight</th>
+            <th>Fragile?</th>
+            <th>Status</th>
+            <th style="text-align:right;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="admin-inventory-table">
+          <tr><td colspan="8" style="text-align:center; padding:32px;">Loading system inventory...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  
+  <script src="js/admin.js"></script>
+</body>
+</html>
