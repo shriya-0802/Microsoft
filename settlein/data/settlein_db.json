@@ -9,7 +9,6 @@
       "id": "hood-0",
       "name": "Sector 1 Enclave",
       "city": "Bhubaneswar, India",
-      "emoji": "🌳",
       "vibe": [
         "Family-Friendly"
       ],
@@ -28,7 +27,6 @@
       "id": "hood-1",
       "name": "Sector 2 Enclave",
       "city": "Bengaluru, India",
-      "emoji": "🏙️",
       "vibe": [
         "Luxury & Upscale"
       ],
@@ -47,7 +45,6 @@
       "id": "hood-2",
       "name": "Sector 3 Enclave",
       "city": "Mumbai, India",
-      "emoji": "🌳",
       "vibe": [
         "Tech Hub"
       ],
@@ -66,7 +63,6 @@
       "id": "hood-3",
       "name": "Sector 4 Enclave",
       "city": "Delhi NCR, India",
-      "emoji": "🏙️",
       "vibe": [
         "Quiet & Green"
       ],
@@ -85,7 +81,6 @@
       "id": "hood-4",
       "name": "Sector 5 Enclave",
       "city": "Hyderabad, India",
-      "emoji": "🌳",
       "vibe": [
         "Student Hub"
       ],
@@ -104,7 +99,6 @@
       "id": "hood-5",
       "name": "Sector 6 Enclave",
       "city": "Austin, TX",
-      "emoji": "🏙️",
       "vibe": [
         "Nightlife"
       ],
@@ -123,7 +117,6 @@
       "id": "hood-6",
       "name": "Sector 7 Enclave",
       "city": "Singapore",
-      "emoji": "🌳",
       "vibe": [
         "Business District"
       ],
@@ -142,7 +135,6 @@
       "id": "hood-7",
       "name": "Sector 8 Enclave",
       "city": "Dubai, UAE",
-      "emoji": "🏙️",
       "vibe": [
         "Family-Friendly"
       ],
@@ -161,7 +153,6 @@
       "id": "hood-8",
       "name": "Sector 9 Enclave",
       "city": "Tokyo, Japan",
-      "emoji": "🌳",
       "vibe": [
         "Luxury & Upscale"
       ],
@@ -180,7 +171,6 @@
       "id": "hood-9",
       "name": "Sector 10 Enclave",
       "city": "Seattle, WA",
-      "emoji": "🏙️",
       "vibe": [
         "Tech Hub"
       ],
@@ -199,7 +189,6 @@
       "id": "hood-10",
       "name": "Sector 11 Enclave",
       "city": "Bhubaneswar, India",
-      "emoji": "🌳",
       "vibe": [
         "Quiet & Green"
       ],
@@ -218,7 +207,6 @@
       "id": "hood-11",
       "name": "Sector 12 Enclave",
       "city": "Bengaluru, India",
-      "emoji": "🏙️",
       "vibe": [
         "Student Hub"
       ],
@@ -237,7 +225,6 @@
       "id": "hood-12",
       "name": "Sector 13 Enclave",
       "city": "Mumbai, India",
-      "emoji": "🌳",
       "vibe": [
         "Nightlife"
       ],
@@ -256,7 +243,6 @@
       "id": "hood-13",
       "name": "Sector 14 Enclave",
       "city": "Delhi NCR, India",
-      "emoji": "🏙️",
       "vibe": [
         "Business District"
       ],
@@ -275,7 +261,6 @@
       "id": "hood-14",
       "name": "Sector 15 Enclave",
       "city": "Hyderabad, India",
-      "emoji": "🌳",
       "vibe": [
         "Family-Friendly"
       ],
@@ -294,7 +279,6 @@
       "id": "hood-15",
       "name": "Sector 16 Enclave",
       "city": "Austin, TX",
-      "emoji": "🏙️",
       "vibe": [
         "Luxury & Upscale"
       ],
@@ -313,7 +297,6 @@
       "id": "hood-16",
       "name": "Sector 17 Enclave",
       "city": "Singapore",
-      "emoji": "🌳",
       "vibe": [
         "Tech Hub"
       ],
@@ -332,7 +315,6 @@
       "id": "hood-17",
       "name": "Sector 18 Enclave",
       "city": "Dubai, UAE",
-      "emoji": "🏙️",
       "vibe": [
         "Quiet & Green"
       ],
@@ -351,7 +333,6 @@
       "id": "hood-18",
       "name": "Sector 19 Enclave",
       "city": "Tokyo, Japan",
-      "emoji": "🌳",
       "vibe": [
         "Student Hub"
       ],
@@ -370,7 +351,6 @@
       "id": "hood-19",
       "name": "Sector 20 Enclave",
       "city": "Seattle, WA",
-      "emoji": "🏙️",
       "vibe": [
         "Nightlife"
       ],
@@ -389,7 +369,6 @@
       "id": "hood-20",
       "name": "Sector 21 Enclave",
       "city": "Bhubaneswar, India",
-      "emoji": "🌳",
       "vibe": [
         "Business District"
       ],
@@ -408,7 +387,6 @@
       "id": "hood-21",
       "name": "Sector 22 Enclave",
       "city": "Bengaluru, India",
-      "emoji": "🏙️",
       "vibe": [
         "Family-Friendly"
       ],
@@ -427,7 +405,6 @@
       "id": "hood-22",
       "name": "Sector 23 Enclave",
       "city": "Mumbai, India",
-      "emoji": "🌳",
       "vibe": [
         "Luxury & Upscale"
       ],
@@ -446,7 +423,6 @@
       "id": "hood-23",
       "name": "Sector 24 Enclave",
       "city": "Delhi NCR, India",
-      "emoji": "🏙️",
       "vibe": [
         "Tech Hub"
       ],
@@ -465,7 +441,6 @@
       "id": "hood-24",
       "name": "Sector 25 Enclave",
       "city": "Hyderabad, India",
-      "emoji": "🌳",
       "vibe": [
         "Quiet & Green"
       ],
@@ -484,7 +459,6 @@
       "id": "hood-25",
       "name": "Sector 26 Enclave",
       "city": "Austin, TX",
-      "emoji": "🏙️",
       "vibe": [
         "Student Hub"
       ],
@@ -503,7 +477,6 @@
       "id": "hood-26",
       "name": "Sector 27 Enclave",
       "city": "Singapore",
-      "emoji": "🌳",
       "vibe": [
         "Nightlife"
       ],
@@ -522,7 +495,6 @@
       "id": "hood-27",
       "name": "Sector 28 Enclave",
       "city": "Dubai, UAE",
-      "emoji": "🏙️",
       "vibe": [
         "Business District"
       ],
@@ -541,7 +513,6 @@
       "id": "hood-28",
       "name": "Sector 29 Enclave",
       "city": "Tokyo, Japan",
-      "emoji": "🌳",
       "vibe": [
         "Family-Friendly"
       ],
@@ -560,7 +531,6 @@
       "id": "hood-29",
       "name": "Sector 30 Enclave",
       "city": "Seattle, WA",
-      "emoji": "🏙️",
       "vibe": [
         "Luxury & Upscale"
       ],
@@ -579,7 +549,6 @@
       "id": "hood-30",
       "name": "Sector 31 Enclave",
       "city": "Bhubaneswar, India",
-      "emoji": "🌳",
       "vibe": [
         "Tech Hub"
       ],
@@ -598,7 +567,6 @@
       "id": "hood-31",
       "name": "Sector 32 Enclave",
       "city": "Bengaluru, India",
-      "emoji": "🏙️",
       "vibe": [
         "Quiet & Green"
       ],
@@ -617,7 +585,6 @@
       "id": "hood-32",
       "name": "Sector 33 Enclave",
       "city": "Mumbai, India",
-      "emoji": "🌳",
       "vibe": [
         "Student Hub"
       ],
@@ -636,7 +603,6 @@
       "id": "hood-33",
       "name": "Sector 34 Enclave",
       "city": "Delhi NCR, India",
-      "emoji": "🏙️",
       "vibe": [
         "Nightlife"
       ],
@@ -655,7 +621,6 @@
       "id": "hood-34",
       "name": "Sector 35 Enclave",
       "city": "Hyderabad, India",
-      "emoji": "🌳",
       "vibe": [
         "Business District"
       ],
@@ -674,7 +639,6 @@
       "id": "hood-35",
       "name": "Sector 36 Enclave",
       "city": "Austin, TX",
-      "emoji": "🏙️",
       "vibe": [
         "Family-Friendly"
       ],
@@ -693,7 +657,6 @@
       "id": "hood-36",
       "name": "Sector 37 Enclave",
       "city": "Singapore",
-      "emoji": "🌳",
       "vibe": [
         "Luxury & Upscale"
       ],
@@ -712,7 +675,6 @@
       "id": "hood-37",
       "name": "Sector 38 Enclave",
       "city": "Dubai, UAE",
-      "emoji": "🏙️",
       "vibe": [
         "Tech Hub"
       ],
@@ -731,7 +693,6 @@
       "id": "hood-38",
       "name": "Sector 39 Enclave",
       "city": "Tokyo, Japan",
-      "emoji": "🌳",
       "vibe": [
         "Quiet & Green"
       ],
@@ -750,7 +711,6 @@
       "id": "hood-39",
       "name": "Sector 40 Enclave",
       "city": "Seattle, WA",
-      "emoji": "🏙️",
       "vibe": [
         "Student Hub"
       ],
@@ -769,7 +729,6 @@
       "id": "hood-40",
       "name": "Sector 41 Enclave",
       "city": "Bhubaneswar, India",
-      "emoji": "🌳",
       "vibe": [
         "Nightlife"
       ],
@@ -788,7 +747,6 @@
       "id": "hood-41",
       "name": "Sector 42 Enclave",
       "city": "Bengaluru, India",
-      "emoji": "🏙️",
       "vibe": [
         "Business District"
       ],
@@ -807,7 +765,6 @@
       "id": "hood-42",
       "name": "Sector 43 Enclave",
       "city": "Mumbai, India",
-      "emoji": "🌳",
       "vibe": [
         "Family-Friendly"
       ],
@@ -826,7 +783,6 @@
       "id": "hood-43",
       "name": "Sector 44 Enclave",
       "city": "Delhi NCR, India",
-      "emoji": "🏙️",
       "vibe": [
         "Luxury & Upscale"
       ],
@@ -845,7 +801,6 @@
       "id": "hood-44",
       "name": "Sector 45 Enclave",
       "city": "Hyderabad, India",
-      "emoji": "🌳",
       "vibe": [
         "Tech Hub"
       ],
@@ -864,7 +819,6 @@
       "id": "hood-45",
       "name": "Sector 46 Enclave",
       "city": "Austin, TX",
-      "emoji": "🏙️",
       "vibe": [
         "Quiet & Green"
       ],
@@ -883,7 +837,6 @@
       "id": "hood-46",
       "name": "Sector 47 Enclave",
       "city": "Singapore",
-      "emoji": "🌳",
       "vibe": [
         "Student Hub"
       ],
@@ -902,7 +855,6 @@
       "id": "hood-47",
       "name": "Sector 48 Enclave",
       "city": "Dubai, UAE",
-      "emoji": "🏙️",
       "vibe": [
         "Nightlife"
       ],
@@ -921,7 +873,6 @@
       "id": "hood-48",
       "name": "Sector 49 Enclave",
       "city": "Tokyo, Japan",
-      "emoji": "🌳",
       "vibe": [
         "Business District"
       ],
@@ -940,7 +891,6 @@
       "id": "hood-49",
       "name": "Sector 50 Enclave",
       "city": "Seattle, WA",
-      "emoji": "🏙️",
       "vibe": [
         "Family-Friendly"
       ],
@@ -959,7 +909,6 @@
       "id": "hood-real-1000",
       "name": "Koramangala",
       "city": "Bengaluru, India",
-      "emoji": "🏙️",
       "vibe": [
         "Trendy & Central"
       ],
@@ -978,7 +927,6 @@
       "id": "hood-real-1001",
       "name": "Indiranagar",
       "city": "Bengaluru, India",
-      "emoji": "🌳",
       "vibe": [
         "Trendy & Nightlife"
       ],
@@ -997,7 +945,6 @@
       "id": "hood-real-1002",
       "name": "HSR Layout",
       "city": "Bengaluru, India",
-      "emoji": "🏙️",
       "vibe": [
         "Tech & Corporate"
       ],
@@ -1016,7 +963,6 @@
       "id": "hood-real-1003",
       "name": "Whitefield",
       "city": "Bengaluru, India",
-      "emoji": "🌳",
       "vibe": [
         "Tech & Corporate"
       ],
@@ -1035,7 +981,6 @@
       "id": "hood-real-1004",
       "name": "Electronic City",
       "city": "Bengaluru, India",
-      "emoji": "🌳",
       "vibe": [
         "Tech & Corporate"
       ],
@@ -1054,7 +999,6 @@
       "id": "hood-real-1005",
       "name": "Jayanagar",
       "city": "Bengaluru, India",
-      "emoji": "🌳",
       "vibe": [
         "Trendy & Nightlife"
       ],
@@ -1073,7 +1017,6 @@
       "id": "hood-real-1006",
       "name": "BTM Layout",
       "city": "Bengaluru, India",
-      "emoji": "🏙️",
       "vibe": [
         "Tech & Corporate"
       ],
@@ -1092,7 +1035,6 @@
       "id": "hood-real-1007",
       "name": "Malleshwaram",
       "city": "Bengaluru, India",
-      "emoji": "🏙️",
       "vibe": [
         "Trendy & Nightlife"
       ],
@@ -1111,7 +1053,6 @@
       "id": "hood-real-1008",
       "name": "Bandra West",
       "city": "Mumbai, India",
-      "emoji": "🏙️",
       "vibe": [
         "Tech & Corporate"
       ],
@@ -1130,7 +1071,6 @@
       "id": "hood-real-1009",
       "name": "Andheri West",
       "city": "Mumbai, India",
-      "emoji": "🌳",
       "vibe": [
         "Peaceful & Family"
       ],
@@ -1149,7 +1089,6 @@
       "id": "hood-real-1010",
       "name": "Powai",
       "city": "Mumbai, India",
-      "emoji": "🏙️",
       "vibe": [
         "Peaceful & Family"
       ],
@@ -1168,7 +1107,6 @@
       "id": "hood-real-1011",
       "name": "Juhu",
       "city": "Mumbai, India",
-      "emoji": "🏙️",
       "vibe": [
         "Peaceful & Family"
       ],
@@ -1187,7 +1125,6 @@
       "id": "hood-real-1012",
       "name": "Colaba",
       "city": "Mumbai, India",
-      "emoji": "🌳",
       "vibe": [
         "Peaceful & Family"
       ],
@@ -1206,7 +1143,6 @@
       "id": "hood-real-1013",
       "name": "Worli",
       "city": "Mumbai, India",
-      "emoji": "🌳",
       "vibe": [
         "Trendy & Central"
       ],
@@ -1225,7 +1161,6 @@
       "id": "hood-real-1014",
       "name": "Lower Parel",
       "city": "Mumbai, India",
-      "emoji": "🏙️",
       "vibe": [
         "Trendy & Nightlife"
       ],
@@ -1244,7 +1179,6 @@
       "id": "hood-real-1015",
       "name": "Goregaon",
       "city": "Mumbai, India",
-      "emoji": "🏙️",
       "vibe": [
         "Trendy & Central"
       ],
@@ -1263,7 +1197,6 @@
       "id": "hood-real-1016",
       "name": "Hauz Khas",
       "city": "Delhi NCR, India",
-      "emoji": "🏙️",
       "vibe": [
         "Trendy & Central"
       ],
@@ -1282,7 +1215,6 @@
       "id": "hood-real-1017",
       "name": "Vasant Vihar",
       "city": "Delhi NCR, India",
-      "emoji": "🏙️",
       "vibe": [
         "Trendy & Central"
       ],
@@ -1301,7 +1233,6 @@
       "id": "hood-real-1018",
       "name": "Defence Colony",
       "city": "Delhi NCR, India",
-      "emoji": "🏙️",
       "vibe": [
         "Trendy & Central"
       ],
@@ -1320,7 +1251,6 @@
       "id": "hood-real-1019",
       "name": "Greater Kailash",
       "city": "Delhi NCR, India",
-      "emoji": "🌳",
       "vibe": [
         "Peaceful & Family"
       ],
@@ -1339,7 +1269,6 @@
       "id": "hood-real-1020",
       "name": "Saket",
       "city": "Delhi NCR, India",
-      "emoji": "🌳",
       "vibe": [
         "Tech & Corporate"
       ],
@@ -1358,7 +1287,6 @@
       "id": "hood-real-1021",
       "name": "Gurugram Sector 54",
       "city": "Delhi NCR, India",
-      "emoji": "🌳",
       "vibe": [
         "Trendy & Central"
       ],
@@ -1377,7 +1305,6 @@
       "id": "hood-real-1022",
       "name": "Noida Sector 15",
       "city": "Delhi NCR, India",
-      "emoji": "🏙️",
       "vibe": [
         "Peaceful & Family"
       ],
@@ -1396,7 +1323,6 @@
       "id": "hood-real-1023",
       "name": "Banjara Hills",
       "city": "Hyderabad, India",
-      "emoji": "🏙️",
       "vibe": [
         "Peaceful & Family"
       ],
@@ -1415,7 +1341,6 @@
       "id": "hood-real-1024",
       "name": "Jubilee Hills",
       "city": "Hyderabad, India",
-      "emoji": "🌳",
       "vibe": [
         "Peaceful & Family"
       ],
@@ -1434,7 +1359,6 @@
       "id": "hood-real-1025",
       "name": "HITEC City",
       "city": "Hyderabad, India",
-      "emoji": "🌳",
       "vibe": [
         "Peaceful & Family"
       ],
@@ -1453,7 +1377,6 @@
       "id": "hood-real-1026",
       "name": "Gachibowli",
       "city": "Hyderabad, India",
-      "emoji": "🌳",
       "vibe": [
         "Tech & Corporate"
       ],
@@ -1472,7 +1395,6 @@
       "id": "hood-real-1027",
       "name": "Kondapur",
       "city": "Hyderabad, India",
-      "emoji": "🌳",
       "vibe": [
         "Trendy & Nightlife"
       ],
@@ -1491,7 +1413,6 @@
       "id": "hood-real-1028",
       "name": "Madhapur",
       "city": "Hyderabad, India",
-      "emoji": "🏙️",
       "vibe": [
         "Peaceful & Family"
       ],
@@ -1510,7 +1431,6 @@
       "id": "hood-real-1029",
       "name": "Khandagiri",
       "city": "Bhubaneswar, India",
-      "emoji": "🏙️",
       "vibe": [
         "Peaceful & Family"
       ],
@@ -1529,7 +1449,6 @@
       "id": "hood-real-1030",
       "name": "Patia",
       "city": "Bhubaneswar, India",
-      "emoji": "🏙️",
       "vibe": [
         "Trendy & Central"
       ],
@@ -1548,7 +1467,6 @@
       "id": "hood-real-1031",
       "name": "Jayadev Vihar",
       "city": "Bhubaneswar, India",
-      "emoji": "🌳",
       "vibe": [
         "Tech & Corporate"
       ],
@@ -1567,7 +1485,6 @@
       "id": "hood-real-1032",
       "name": "Chandrasekharpur",
       "city": "Bhubaneswar, India",
-      "emoji": "🏙️",
       "vibe": [
         "Trendy & Nightlife"
       ],
@@ -1586,7 +1503,6 @@
       "id": "hood-real-1033",
       "name": "Saheed Nagar",
       "city": "Bhubaneswar, India",
-      "emoji": "🏙️",
       "vibe": [
         "Trendy & Central"
       ],
@@ -1605,7 +1521,6 @@
       "id": "hood-real-1034",
       "name": "Nayapalli",
       "city": "Bhubaneswar, India",
-      "emoji": "🌳",
       "vibe": [
         "Peaceful & Family"
       ],
