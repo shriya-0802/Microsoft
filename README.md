@@ -1,10 +1,10 @@
-# SettleIn — AI-Powered Relocation Operating System
+# SettleIn: AI Powered Relocation Operating System
 
 **Live Demo:** [https://settlein-yupd.onrender.com](https://settlein-yupd.onrender.com/)
 
 Built for the **Microsoft Agent-a-thon 2026**, **SettleIn** transforms the fragmented, stressful process of moving to a new city into a seamless, delightful, and fully autonomous digital experience.
 
----
+
 
 ## 🌟 The Vision
 
