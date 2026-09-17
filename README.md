@@ -22,7 +22,7 @@ SettleIn transforms the fragmented, stressful process of moving to a new city in
    # or
    node server.js
    ```
-3. Open `http://localhost:3000` (or the port specified by the server) in your browser.
+3. Open `http://localhost:8080` (or the port specified by the server) in your browser.
 
 ## Built With
 - HTML, CSS, JavaScript (Vanilla Frontend)
